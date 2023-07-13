@@ -28,5 +28,7 @@ class Question extends Model
         'question',
         'air_date',
         'notes',
+        'episode_id',
     ];
+
 }

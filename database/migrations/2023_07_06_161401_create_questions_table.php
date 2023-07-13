@@ -14,14 +14,15 @@ return new class extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->integer('round');
-            $table->integer('value')->nullable();
+            $table->integer('clue_value')->nullable();
             $table->integer('daily_double_value')->nullable();
-            $table->string('category')->nullable();
+            $table->string('category');
             $table->text('comments')->nullable();
             $table->text('answer');
             $table->text('question');
-            $table->timestamp('air_date')->nullable();
+            $table->date('air_date');
             $table->text('notes')->nullable();
+            $table->uuid('episode_id');
             $table->timestamps();
         });
     }
