@@ -20,7 +20,7 @@ class Question extends Model
      */
     protected $fillable = [
         'round',
-        'value',
+        'clue_value',
         'daily_double_value',
         'category',
         'comments',
@@ -29,6 +29,14 @@ class Question extends Model
         'air_date',
         'notes',
         'episode_id',
+    ];
+
+    /** @var array $casts Set the attributes' casting */
+    protected $casts = [
+        'air_date' => 'date',
+        'round' => 'integer',
+        'clue_value' => 'integer',
+        'daily_double_value' => 'integer',
     ];
 
 }
