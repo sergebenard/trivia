@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\GameController;
+
+// use App\Http\Livewire\Game\Index;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,7 +20,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/game/{episode_id}', [GameController::class, 'create'])
+Route::get('/game/{episode}', \App\Http\Livewire\Game\Index::class)
     ->name('game.create');
 
 Route::get('/dashboard', function () {
