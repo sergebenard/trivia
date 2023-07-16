@@ -4,6 +4,6 @@
     @endslot
 
     {{-- @dd( $questions ) --}}
-    @livewire('game.index', ['episode_id' => $episode_id])
+    @livewire('game.index', ['episode' => $episode->id])
 
 </x-app-layout>
