@@ -28,9 +28,10 @@ class Clue extends Component
         $this->show = true;
     }
 
-    function viewAnswer() {
+    public function viewAnswer() {
         $this->show_answer = true;
     }
+
 
     /**
      *
