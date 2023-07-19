@@ -1,4 +1,9 @@
-@props(['id', 'maxWidth'])
+@props([
+    'id',
+    'maxWidth',
+    'escape_closes' => true,
+    'click_outside_closes' => true,
+])
 
 @php
 $id = $id ?? md5($attributes->wire('model'));
@@ -14,7 +19,7 @@ $maxWidth = [
 <div
 x-data="{ show: @entangle($attributes->wire('model')).defer }"
 x-on:close.stop="show = false"
-x-on:keydown.escape.window="show = false"
+@if( $escape_closes ) x-on:keydown.escape.window="show = false" @endif
 x-show="show"
 id="{{ $id }}"
 class="fixed inset-0 z-50 px-4 py-6 overflow-y-auto sm:px-0"
@@ -22,12 +27,15 @@ style="display: none;"
 >
     <!-- Begin modal.index component -->
 
-    <div x-show="show" class="fixed inset-0 transition-all transform" x-on:click="show = false" x-transition:enter="ease-out duration-300"
-                    x-transition:enter-start="opacity-0"
-                    x-transition:enter-end="opacity-100"
-                    x-transition:leave="ease-in duration-200"
-                    x-transition:leave-start="opacity-100"
-                    x-transition:leave-end="opacity-0">
+    <div x-show="show"
+        class="fixed inset-0 transition-all transform"
+        @if($click_outside_closes) x-on:click="show = false" @endif
+        x-transition:enter="ease-out duration-300"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="ease-in duration-200"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0">
         <div class="absolute inset-0 bg-gray-500 opacity-75 dark:bg-gray-900"></div>
     </div>
 

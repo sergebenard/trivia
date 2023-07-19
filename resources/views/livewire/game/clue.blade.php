@@ -7,7 +7,7 @@
         @endif
     </x-button>
 
-    <x-modal.dialog name="show-clue"
+    <x-modal.dialog :escape_closes="false" :click_outside_closes="false" name="show-clue"
         wire:model='show'
         class="flex flex-col min-h-full px-3 py-2 space-y-3 bg-blue-700">
         <x-slot:title class="flex text-2xl font-bold text-white btnHeaderShadow">
