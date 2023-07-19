@@ -1,3 +1,10 @@
 @tailwind base;
+.btnHeaderShadow {
+    text-shadow: 2px 2px 0px #000000;
+}
+
+.btnTextShadow {
+    text-shadow: 4px 4px 0px #000000;
+}
 @tailwind components;
 @tailwind utilities;
