@@ -5,5 +5,5 @@
 <div>
     @livewire('game.board', ['episode' => $episode->id])
 
-    @livewire('game.clue')
+    {{-- @livewire('game.clue') --}}
 </div>
