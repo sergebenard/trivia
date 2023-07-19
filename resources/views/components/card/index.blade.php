@@ -6,7 +6,9 @@
 <div {{ $attributes->merge(['class' => 'card']) }} >
     <div @if($body) {{ $body->attributes->merge(['class' => 'card-body']) }} @else class="card-body" @endif>
         @if($title)
+        <div {{ $title->attributes->merge(['class' => 'card-title']) }}>
             {{ $title }}
+        </div>
         @endif
 
         @if($body)
