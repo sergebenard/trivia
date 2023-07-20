@@ -1,5 +1,5 @@
 <div>
-    <div class="join">
+    <div class="pt-2 join">
         <select wire:model='year'
             class="select select-bordered join-item"
             name="specific-date-year"
@@ -7,7 +7,7 @@
             <option disabled
                 value="0"
                 @selected($year == 0)>
-                Select a year
+                Year
             </option>
 
             @foreach ($years as $yearloop)
@@ -24,7 +24,7 @@
                 <option disabled
                     value="0"
                     @selected($month == 0)>
-                    Select a month
+                    Month
                 </option>
 
                 @foreach ($months as $monthloop)
@@ -43,7 +43,7 @@
                 <option disabled
                     value="0"
                     @selected($day == 0)>
-                    Select a day
+                    Day
                 </option>
 
                 @foreach ($days as $dayloop)
@@ -77,7 +77,7 @@
         $max_questions_per_episode = 61;
     @endphp
     <div class="block pt-4">
-        <div class="box-border bg-base-200 stats text-base-content">
+        <div class="box-border overflow-x-auto bg-base-200 stats stats-vertical text-base-content">
             @foreach ($episodes as $episode)
                 <div class="stat">
                     <div class="stat-title">Episode Questions</div>
