@@ -41,7 +41,7 @@
                         Correct
                     </x-button>
 
-                    <x-button wire:click.prevent="hideClue" class="flex-1 btn-ghost join-item" autofucus>
+                    <x-button wire:click.prevent="hideClue" class="flex-1 btn-ghost text-blue-50 join-item" autofucus>
                         Didn't Know
                     </x-button>
 
