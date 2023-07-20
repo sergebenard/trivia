@@ -4,7 +4,7 @@
         @if($show_answer)
             &nbsp;
         @else
-        {{ $question->clue_value }}
+            <span class="text-sm">&dollar;<!-- Dollar Sign! --></span>{{ $question->clue_value }}
         @endif
     </x-button>
     @if($show)
@@ -15,9 +15,9 @@
             <div class="flex-1">
                 {{ Str::title( Str::ascii($question->category) ) }}
             </div>
-            <div class="flex items-baseline gap-2">
+            <div class="flex items-baseline gap-2 text-xl">
                 <div class="text-lg">
-                    $ <!-- Dollar Sign! -->
+                    &dollar; <!-- Dollar Sign! -->
                 </div>
 
                 <div>
@@ -26,16 +26,14 @@
             </div>
         </x-slot:title>
 
-        <x-slot:content class="flex flex-1 overflow-y-auto text-6xl font-bold text-center text-yellow-300 uppercase btnTextShadow">
-
-        {{-- <x-slot:content class="flex items-center flex-1 overflow-y-auto text-6xl font-bold text-center text-yellow-300 uppercase btnTextShadow"> --}}
-                <span class="block px-4 my-auto">{{ Str::ascii( $question->answer ) }}</span>
+        <x-slot:content class="flex flex-1 overflow-y-auto font-bold text-center min-h-16">
+                <span class="block px-4 my-auto text-3xl text-yellow-300 uppercase sm:text-6xl btnTextShadow">{{ $question->answer }}</span>
         </x-slot:content>
 
         <x-slot:footer class="w-full">
             <div class="w-full">
                 @if($show_answer)
-                <div class="py-3 text-3xl text-center uppercase text-blue-50">
+                <div class="py-3 text-center uppercase sm:text-3xl text-blue-50">
                     {{ $question->question }}
                 </div>
                 <div class="flex w-full join">
