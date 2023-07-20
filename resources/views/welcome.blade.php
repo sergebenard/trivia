@@ -51,24 +51,12 @@
 
             <x-card class="border border-gray-300 card card-compact">
                 <x-slot:title>
-                    <h2 class="text-lg font-medium">Step 2: The Game</h2>
+                    <h2 class="text-lg font-medium">Step 2:</h2>
                 </x-slot:title>
 
                 <x-slot:body>
                     @livewire('welcome.game-settings')
                 </x-slot:body>
-            </x-card>
-
-            <x-card class="border border-gray-300 card card-compact">
-                <x-slot:title>
-                    <h2 class="text-lg font-medium">Step 3: Let's Go!</h2>
-                </x-slot:title>
-
-                {{-- <a href="{{ route('game.create', $episode) }}"></a> --}}
-
-                {{-- <x-button type="submit">
-                    Let's Go!
-                </x-button> --}}
             </x-card>
         </div>
     {{-- </form> --}}
