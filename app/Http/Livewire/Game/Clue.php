@@ -19,13 +19,23 @@ class Clue extends Component
     public Question $question;
 
     /**
-     * Function for when the listener event is tripped
+     * Function to make the clue visible
      *
      * @return void
      **/
     public function viewClue()
     {
         $this->show = true;
+    }
+
+    /**
+     * Function to hide the clue
+     *
+     * @return void
+     **/
+    public function hideClue()
+    {
+        $this->show = false;
     }
 
     public function viewAnswer() {
