@@ -8,17 +8,17 @@
     $current_category = ''; // To check if category has changed
 @endphp
 
-<div>
+<div data-theme="board">
     <div class="max-w-5xl pt-6 mx-auto">
 
         <div class="grid w-full grid-cols-3 gap-3">
             <x-card class="justify-center bg-primary card card-compact">
                 <div class="flex items-center w-full gap-4">
-                    <div class="flex-1 text-right text-indigo-200">
+                    <div class="flex-1 text-right text-primary-content">
                         Player 1
                     </div>
 
-                    <div class="flex items-center gap-2 text-xl font-medium text-indigo-100 btnHeaderShadow">
+                    <div class="flex items-center gap-2 text-xl font-medium text-primary-content btnHeaderShadow">
                         <span class="text-lg ">
                             $
                         </span>
@@ -75,8 +75,8 @@
 
                 @if($row_count === 1)
                     <!-- row_count is equal to 1. -->
-                    <div class="flex items-center justify-center h-12 overflow-y-auto text-center bg-primary max-h-12 text-indigo-50 btnHeaderShadow">
-                        {{ $question->category }}
+                    <div class="flex items-center justify-center h-12 overflow-y-auto text-center text-primary-content bg-primary max-h-12 btnHeaderShadow">
+                        {{ Str::ascii( $question->category ) }}
                     </div>
                 @endif
 
