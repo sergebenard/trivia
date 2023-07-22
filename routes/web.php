@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Route::get('/game/{episode}', \App\Http\Livewire\Game\Index::class)
     ->name('game.create');
