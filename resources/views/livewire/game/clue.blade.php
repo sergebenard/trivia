@@ -1,6 +1,6 @@
-<div class="flex-1">
+<div class="flex flex-1">
     <!-- Clue ID: {{ $question->id }} -->
-    <x-button :square="true" wire:click="viewClue" class="w-full text-xl text-white btnHeaderShadow btn-primary" :disabled="$show_answer">
+    <x-button :square="true" wire:click="viewClue" class="w-full h-16 text-xl text-white btnHeaderShadow btn-primary" :disabled="$show_answer">
         @if($show_answer)
             &nbsp;
         @else
