@@ -11,8 +11,8 @@
 <div data-theme="board">
     <div class="max-w-5xl pt-6 mx-auto">
 
-        <div class="grid w-full grid-cols-3 gap-3">
-            <x-card class="justify-center bg-primary card card-compact">
+        <div class="flex items-center gap-4">
+            <x-card class="justify-center max-w-xs bg-primary card card-compact">
                 <div class="flex items-center w-full gap-4">
                     <div class="flex-1 text-right text-primary-content">
                         Player 1
@@ -28,6 +28,39 @@
                     </div>
                 </div>
             </x-card>
+
+            <x-card class="card-compact ">
+                <div class="flex items-center w-full gap-4">
+                    <div class="flex-1 text-right text-primary">
+                        Play round:
+                    </div>
+
+                    <div class="join">
+                        @if($round_count == 1)
+                        <span class="btn btn-primary join-item btn-active">
+                            One
+                        </span>
+
+                        <x-button class="btn-primary join-item" :active="false" wire:click.prevent='changeRound(2)'>
+                            Two
+                        </x-button>
+                        @elseif($round_count == 2)
+                        <x-button class="btn-primary join-item" :active="false" wire:click.prevent='changeRound(1)'>
+                            One
+                        </x-button>
+
+                        <span class="btn btn-primary join-item btn-active">
+                            Two
+                        </span>
+                        @endif
+
+                    </div>
+                </div>
+            </x-card>
+
+            <a class="btn btn-primary btn-outline" href="{{ route('welcome') }}">
+                New Game
+            </a>
         </div>
 
         <div class="grid items-center justify-center w-full grid-flow-col grid-cols-6 grid-rows-6 gap-1 p-2 mt-3 bg-black">
@@ -75,8 +108,10 @@
 
                 @if($row_count === 1)
                     <!-- row_count is equal to 1. -->
-                    <div class="flex items-center justify-center h-12 overflow-y-auto text-center text-primary-content bg-primary max-h-12 btnHeaderShadow">
-                        {{ Str::ascii( $question->category ) }}
+                    <div class="flex h-16 overflow-x-auto overflow-y-auto text-center text-primary-content bg-primary btnHeaderShadow">
+                        <span class="block mx-auto my-auto leading-normal">
+                            {{ $question->category }}
+                        </span>
                     </div>
                 @endif
 
@@ -94,7 +129,9 @@
                 @else
                     <x-comment>!! The clue DOES NOT match the row_count !!</x-comment>
 
-                    @while (!$this->is_correct_square( $question ))
+                    @while ($this->get_row_cost($row_count) != $question->clue_value && $row_count <= $max_rows)
+                        <x-comment>The clue still DOES NOT match the row_count, which is: {{ $row_count }}</x-comment>
+
                         <div>&nbsp;</div>
 
                         @php
@@ -102,13 +139,17 @@
                         @endphp
 
                         {{-- let's keep things sane! --}}
-                        @if( $row_count >= $max_rows )
+                        @if( $row_count > $max_rows )
                             @break
                         @endif
                     @endwhile
 
                     {{-- Now show the clue value in its correct square! --}}
-                    @livewire('game.clue', ['question' => $question])
+                    @livewire('game.clue', ['question' => $question], key('clue-' . $question->id))
+
+                    @php
+                        $row_count++;
+                    @endphp
 
                 @endif
 
@@ -126,12 +167,4 @@
                     @break
                 @endif
             @endforeach
-
-
-            {{-- // If the board is full, let's do a sanity check and stop in case it won't do it by itself --}}
-            {{-- if( $this->row_count >= $this->max_rows && $this->column_count > $this->max_columns ) { --}}
-                {{-- break; --}}
-            {{-- } --}}
-        {{-- } --}}
-        {{-- $this->add_closing_board_tags_to_board(); --}}
 </div>
