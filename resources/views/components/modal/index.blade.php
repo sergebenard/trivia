@@ -28,7 +28,7 @@ style="display: none;"
     <!-- Begin modal.index component -->
 
     <div x-show="show"
-        class="fixed inset-0 transition-all transform"
+        class="fixed inset-0 transition-all transform will-change-transform"
         @if($click_outside_closes) x-on:click="show = false" @endif
         x-transition:enter="ease-out duration-300"
         x-transition:enter-start="opacity-0"
