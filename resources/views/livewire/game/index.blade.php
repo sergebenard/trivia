@@ -3,7 +3,5 @@
 @endslot
 
 <div>
-    @livewire('game.board', ['episode' => $episode->id])
-
-    {{-- @livewire('game.clue') --}}
+    @livewire('game.board', ['episode' => $episode])
 </div>
