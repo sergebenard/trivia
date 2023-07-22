@@ -11,6 +11,9 @@ export default {
 
     theme: {
         extend: {
+            minWidth: {
+                'sm': '40em',
+            }
         },
     },
 
@@ -19,7 +22,25 @@ export default {
     ],
     daisyui: {
         themes: [
-            'winter',
+            {
+                corporate: {
+                    ...require("daisyui/src/theming/themes")["[data-theme=corporate]"],
+                    ".bg-board": {
+                        "background-color": "#072399",
+                        "color": "WHITE",
+                    },
+                    ".btn-clue, .box-category": {
+                        "color": "WHITE",
+                        "background-color": "#072399",
+                        "border-color": "#072399",
+                        "text-shadow": "2px 2px 0px #000000",
+                    },
+
+                    ".btn-clue:hover": {
+                        "background-color": "#073499"
+                    },
+                }
+            }
         ]
     }
 };
