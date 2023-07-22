@@ -10,9 +10,11 @@ use Illuminate\Database\Eloquent\Collection;
 
 class Board extends Component
 {
-    public Collection $questions;
+    public Episode|null $episode = null;
 
-    public Collection|null $question = null;
+    public Collection|null $questions = null;
+
+    public Question|null $question = null;
 
     /** @var Int $round_count Keeping count of the current round */
     public $round_count = 1; // Keep track of the current round
@@ -39,34 +41,71 @@ class Board extends Component
     public function mount(Episode $episode)
     {
 
-        $questions =    Question::select(
-								'id',
-								'round',
-								'clue_value',
-								'daily_double_value',
-								'category',
-								'answer',
-								'question',
-                                'air_date',
-							)
-						->where('episode_id', $episode->id)
-						->where('round', $this->round_count)
-						->orderBy('category', 'asc')
-						->orderBy('clue_value', 'asc')
-						->get();
+        $questions = $this->getRoundQuestions($episode);
 
-        if ($questions->count() < 1) {
+        if ( count($questions) < 1) {
             // dd('Did not load');
             abort(404);
             return;
         }
 
-        $this->fill(['questions' => $questions]);
+        $this->fill([
+                'questions' => $questions,
+                'episode' => $episode,
+            ]);
 
         $this->multiplier_change_date = Carbon::createFromDate(2001, 9, 23);
 
         // Set up the multiplier
 		$this->set_clue_value_multiplier( $this->questions[0] );
+    }
+
+    public function resetBoard() {
+
+        $this->reset(
+                    'questions',
+                    // 'player_points',
+                );
+    }
+
+    public function changeRound(int $round) {
+        $this->resetBoard();
+
+        if( $round >= 1 && $round <= 2 ) {
+            $this->round_count = $round;
+
+            $questions = $this->getRoundQuestions( $this->episode );
+
+            if ($questions->count() < 1) {
+                // dd('Did not load');
+                abort(404);
+                return;
+            }
+
+            $this->fill([
+                    'questions' => $questions,
+                ]);
+
+            $this->set_clue_value_multiplier( $questions[0] );
+        }
+    }
+
+    public function getRoundQuestions(Episode $episode) {
+        return Question::select(
+                        'id',
+                        'round',
+                        'clue_value',
+                        'daily_double_value',
+                        'category',
+                        'answer',
+                        'question',
+                        'air_date',
+                    )
+                ->where('episode_id', $episode->id)
+                ->where('round', $this->round_count)
+                ->orderBy('category', 'asc')
+                ->orderBy('clue_value', 'asc')
+                ->get();
     }
 
 	public function set_clue_value_multiplier(Question $question ) {
