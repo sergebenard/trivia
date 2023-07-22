@@ -11,14 +11,14 @@
 <div data-theme="board">
     <div class="max-w-5xl pt-6 mx-auto">
 
-        <div class="flex items-center gap-4">
-            <x-card class="justify-center max-w-xs bg-primary card card-compact">
+        <div class="flex flex-wrap items-center gap-4">
+            <x-card class="justify-center max-w-xs bg-board card card-compact">
                 <div class="flex items-center w-full gap-4">
-                    <div class="flex-1 text-right text-primary-content">
-                        Player 1
-                    </div>
+                    <a class="btn btn-xs" href="{{ route('welcome') }}">
+                        New Game
+                    </a>
 
-                    <div class="flex items-center gap-2 text-xl font-medium text-primary-content btnHeaderShadow">
+                    <div class="flex items-center gap-2 text-xl font-medium bgcate">
                         <span class="text-lg ">
                             $
                         </span>
@@ -31,7 +31,7 @@
 
             <x-card class="card-compact ">
                 <div class="flex items-center w-full gap-4">
-                    <div class="flex-1 text-right text-primary">
+                    <div class="flex-1 text-right">
                         Play round:
                     </div>
 
@@ -57,10 +57,6 @@
                     </div>
                 </div>
             </x-card>
-
-            <a class="btn btn-primary btn-outline" href="{{ route('welcome') }}">
-                New Game
-            </a>
         </div>
 
         <div class="grid items-center justify-center w-full grid-flow-col grid-cols-6 grid-rows-6 gap-1 p-2 mt-3 bg-black">
@@ -108,7 +104,7 @@
 
                 @if($row_count === 1)
                     <!-- row_count is equal to 1. -->
-                    <div class="flex h-16 overflow-x-auto overflow-y-auto text-center text-primary-content bg-primary btnHeaderShadow">
+                    <div class="flex h-16 overflow-x-auto overflow-y-auto text-center text-primary-content bg-board btnHeaderShadow">
                         <span class="block mx-auto my-auto leading-normal">
                             {{ $question->category }}
                         </span>
@@ -167,4 +163,6 @@
                     @break
                 @endif
             @endforeach
+        </div>
+    </div>
 </div>

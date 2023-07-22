@@ -1,16 +1,16 @@
 <div class="flex flex-1">
     <!-- Clue ID: {{ $question->id }} -->
-    <x-button :square="true" wire:click="viewClue" class="w-full h-16 text-xl text-white btnHeaderShadow btn-primary" :disabled="$show_answer">
+    <x-button :square="true" wire:click="viewClue" class="w-full h-16 text-xl sm:text-2xl btn-clue" :disabled="$show_answer">
         @if($show_answer)
             &nbsp;
         @else
-            <span class="text-sm">&dollar;<!-- Dollar Sign! --></span>{{ $question->clue_value }}
+            <span class="text-sm sm:text-xl">&dollar;<!-- Dollar Sign! --></span>{{ $question->clue_value }}
         @endif
     </x-button>
     @if($show)
     <x-modal.dialog :escape_closes="false" :click_outside_closes="false" name="show-clue"
         wire:model='show'
-        class="flex flex-col min-h-full px-3 py-2 space-y-3 bg-blue-700 max-h-20">
+        class="flex flex-col min-h-full px-3 py-2 space-y-3 bg-blue-700 bg-board max-h-20">
         <x-slot:title class="flex text-2xl font-bold text-white btnHeaderShadow">
             <div class="flex-1">
                 {{ Str::title( Str::ascii($question->category) ) }}
