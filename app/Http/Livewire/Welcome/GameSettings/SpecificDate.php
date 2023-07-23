@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Welcome\GameSettings;
 
 use App\Models\Episode;
+use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
 
 class SpecificDate extends Component
@@ -13,7 +14,7 @@ class SpecificDate extends Component
     public $months = [];
     public $month = 0;
 
-    public $days = [];
+    public Collection|null $days = null;
     public $day = 0;
 
     public $episodes = [];
@@ -71,12 +72,13 @@ class SpecificDate extends Component
                 'episode',
             ]);
 
-        $days = Episode::selectRaw('DISTINCT DAY(air_date) as days')
-                    // ->withCount('questions')
-                    ->orderBy('days')
+        $days = Episode::selectRaw('DAY(air_date) AS day')
+                    ->groupBy()
+                    ->withCount('questions')
+                    ->orderBy('day')
                     ->whereYear('air_date', $this->year)
                     ->whereMonth('air_date', $month)
-                    ->pluck('days');
+                    ->get();
 
         $this->fill(['days' => $days]);
     }
