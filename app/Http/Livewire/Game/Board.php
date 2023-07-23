@@ -16,6 +16,9 @@ class Board extends Component
 
     public Question|null $question = null;
 
+    public String|null $previous_game_id = null;
+    public String|null $next_game_id = null;
+
     /** @var Int $round_count Keeping count of the current round */
     public $round_count = 1; // Keep track of the current round
 
@@ -40,7 +43,6 @@ class Board extends Component
 
     public function mount(Episode $episode)
     {
-
         $questions = $this->getRoundQuestions($episode);
 
         if ( count($questions) < 1) {
@@ -49,9 +51,21 @@ class Board extends Component
             return;
         }
 
+        $previous_game_id = Episode::whereDate('air_date', '<', $episode->air_date)
+                                ->orderBy('air_date', 'DESC')
+                                ->pluck('id')
+                                ->first();
+
+        $next_game_id = Episode::whereDate('air_date', '>', $episode->air_date)
+                                ->orderBy('air_date', 'ASC')
+                                ->pluck('id')
+                                ->first();
+
         $this->fill([
                 'questions' => $questions,
                 'episode' => $episode,
+                'previous_game_id' => $previous_game_id,
+                'next_game_id' => $next_game_id,
             ]);
 
         $this->multiplier_change_date = Carbon::createFromDate(2001, 9, 23);
@@ -82,11 +96,11 @@ class Board extends Component
                 return;
             }
 
+            $this->set_clue_value_multiplier( $questions[0] );
+
             $this->fill([
                     'questions' => $questions,
                 ]);
-
-            $this->set_clue_value_multiplier( $questions[0] );
         }
     }
 
