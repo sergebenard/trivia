@@ -6,19 +6,56 @@
     $column_count = 0; // Keeping track of current column
 
     $current_category = ''; // To check if category has changed
+
 @endphp
 
 <div data-theme="board">
     <div class="max-w-5xl pt-6 mx-auto">
 
-        <div class="flex flex-wrap items-center gap-4">
-            <x-card class="justify-center max-w-xs bg-board card card-compact">
-                <div class="flex items-center w-full gap-4">
-                    <a class="btn btn-xs" href="{{ route('welcome') }}">
-                        New Game
-                    </a>
+        <div class="flex items-center gap-4">
+            <x-card class="max-w-xs bg-board card card-compact">
+                <div class="flex flex-wrap gap-3">
+                    <div class="w-full font-medium">
+                        <span class="font-normal ">
+                            Air Date:
+                        </span>
 
-                    <div class="flex items-center gap-2 text-xl font-medium bgcate">
+                        <span>
+                            @date($episode->air_date)
+                        </span>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <a class="btn btn-xs" href="{{ route('welcome') }}">
+                            New Game
+                        </a>
+
+                        <div class="w-full join-item">
+                            <div class="w-full join">
+                                @if($previous_game_id)
+                                <a href="{{ route('game.create', ['episode' => $previous_game_id]) }}" class="flex-1 btn btn-sm join-item btn-primary">
+                                    Prev
+                                </a>
+                                @else
+                                <div class="opacity-50 cursor-default btn btn-sm btn-primary btn-active">
+                                    Prev
+                                </div>
+                                @endif
+
+                                @if($next_game_id)
+                                <a href="{{ route('game.create', ['episode' => $next_game_id]) }}" class="flex-1 btn btn-sm join-item btn-primary">
+                                    Next
+                                </a>
+                                @else
+                                <div class="opacity-50 cursor-default btn btn-sm btn-primary btn-active">
+                                    Next
+                                </div>
+                                @endif
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-end flex-1 gap-2 pl-4 text-xl font-medium">
                         <span class="text-lg ">
                             $
                         </span>
@@ -27,6 +64,7 @@
                         </span>
                     </div>
                 </div>
+
             </x-card>
 
             <x-card class="card-compact ">
