@@ -47,8 +47,8 @@
                 </option>
 
                 @foreach ($days as $dayloop)
-                    <option value="{{ $dayloop }}"
-                        @selected($day == $dayloop)>{{ $dayloop }}</option>
+                    <option value="{{ $dayloop->day }}"
+                        @selected($day == $dayloop->day)>{{ Str::padRight($dayloop->day, 6, "-") }}({{ $dayloop->questions_count }})</option>
                 @endforeach
             </select>
         @endif
